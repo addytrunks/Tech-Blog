@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<br>
+{% if category_list %}
+  <h1>{{cats|title}} Category</h1>
+  <hr>
+  {% for post in category_list %}
+  <div class="card  width: 24rem">
+
+    <div class="container">
+        <br>
+        <h4>{{post.author|title}}</h4>
+        <h5 class="card-subtitle mb-2 text-muted">{{post.post_date}}</h5><hr>
+    </div>
+
+    <div class="card-body">
+      <h3 id="title"><a href="{% url 'blog:detail' post.pk %}">{{post.title}}</a></h3>
+      <h6>Category:{{post.category|title}}</h6>
+
+      {% if post.text|length <  45  %}
+        <p>{{post.text|safe}}</p>
+      {% else %}
+        <p>{{post.text|slice:":45:"|safe}}....<a href="{% url 'blog:detail' post.pk %}">(Click to continue reading)</a></p>
+      {% endif %}
+
+    </div>
+
+  </div>
+  <br>
+  {% endfor %}
+
+{% else %}
+
+<h4><p>Sorry,there were no posts on '{{cats}}'  were not found. Please add a new post on that category.</p></h4>
+<hr>
+<a href="{% url 'blog:add_post' %}" class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i>   Add Post</a>
+
+{% endif %}
+{% endblock %}

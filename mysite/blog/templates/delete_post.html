@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Delete Post {% endblock %}
+
+{% block content %}
+<br>
+{% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
+    <h3>Delete Post:</h3>
+    <hr>
+
+    <div class="alert alert-danger" role="alert">
+      Are you sure you want to delete?
+    </div>
+
+    <form class="form-group"  method="post">
+      {% csrf_token %}
+      <a href="{% url 'blog:detail' post.pk %}" class="btn btn-md btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
+      <button type="submit" class="btn btn-md btn-danger">Yes, I am Sure</button>
+    </form>
+  {% else %}
+    <hr>
+    <h1>You cant delete other's post.</h1>
+  {% endif %}
+
+{% else %}
+<h3>Error 404</h3>
+<hr>
+<h4>You are not Logged in,you cant delete a post.Click the button below to login.If you're not logged then register.</h4><br>
+<a href="{% url 'login' %}" class="btn btn-primary btn-md"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</a>
+<a href="{% url 'reg:register' %}" class="btn btn-success btn-md">Register</a>
+{% endif %}
+
+{% endblock %}

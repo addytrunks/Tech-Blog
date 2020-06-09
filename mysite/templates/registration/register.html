@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<br>
+
+
+{% if user.is_authenticated %}
+<h1>Already Logged in:</h1><hr>
+<p>You can't register a new user if you are already logged in.Click the button below which will logout and then you can create a new user</p>
+<a href="{% url 'reg:logout' %}" class="btn btn-outline-danger btn-md">Logout</a>
+
+{% else %}
+<h1>Register Account:</h1>
+
+<hr>
+<form class="form-group" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i>     Register</button>
+  <small class="form-text text-muted"><h6>Already have an account?<a href="{% url 'reg:login' %}">Login</a></h6></small>
+</form>
+{% endif %}
+
+{% endblock %}

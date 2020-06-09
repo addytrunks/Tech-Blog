@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Categories List{% endblock %}
+
+{% block content %}
+<br>
+<h1>List of available Categories:</h1>
+<hr>
+
+<div class="list-group-sm bg-dark">
+  {% for item in cat_menu %}
+  <a href="{% url 'blog:category' item %}" class="list-group-item list-group-item-action">
+  {{item|title}}
+  </a>
+  {% endfor %}
+
+</div>
+
+<br>
+
+{% endblock %}

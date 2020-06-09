@@ -1,0 +1,46 @@
+body{
+  font-family: 'Mukta', sans-serif;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.boxy{
+  background-repeat: no-repeat;
+}
+
+#text{
+  font-size: 1em;
+}
+.navbar-brand.boom{
+  color:white;
+  font-family: 'Kaushan Script', cursive;
+}
+
+.list-group-sm a:hover{
+    background-color: #5858FA;
+    color: white;
+}
+
+#about{
+  text-decoration: underline;
+  text-align: center;
+}
+
+.fa.fa-github-square{
+  padding-right: 10px;
+}
+
+#blah{
+  font-family: 'PT Serif', serif;
+}
+
+#title{
+  font-family: 'PT Serif', serif;
+
+}
+
+#blink{
+    font-size: 27px;
+}

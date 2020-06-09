@@ -1,0 +1,68 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}Post Details{% endblock %}
+{% block content %}
+<br>
+<h2>Author Details:</h2>
+<p>Name:{{post.author|title}}</p>
+
+{% if post.author.email == "" %}
+<p>Email:User did not share their email.</p>
+{% else %}
+<p>Email:<a href="mailto:{{post.author.email}}">{{post.author.email}}</a></p>
+{% endif %}
+
+
+<hr>
+<h4>Created at {{ post.post_date }}</h4>
+<p>{{post.text|safe|capfirst}}</p>
+<hr>
+
+{% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
+    <a href="{% url 'blog:home' %}" class="btn btn-info btn-md "><i class="fa fa-arrow-left" aria-hidden="true"></i>    Back</a>
+    <a href="{% url 'blog:update_post' post.pk %}" class="btn btn-warning btn-md">
+      <i class="fa fa-upload" aria-hidden="true"></i>
+      Update?
+    </a>
+    <a href="{% url 'blog:delete_post' post.pk %}" class="btn btn-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i>  Delete Post?</a>
+    <hr>
+
+  {% else %}
+  <a href="{% url 'blog:home' %}" class="btn btn-info btn-md">Back</a>
+  {% endif %}
+  <form class="form-group" action="{% url 'blog:like_post' post.pk %}" method="post">
+    {% csrf_token %}
+
+    {% if liked %}
+      <br>
+      <button type="submit" class="btn btn-danger btn-md" value="{{post.id}}" name="post_id">
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        Unlike
+      </button>
+
+
+    {% else %}
+
+      <br>
+      <button type="submit" class="btn btn-success btn-md" value="{{post.id}}" name="post_id">
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        Like
+      </button>
+
+
+    {% endif %}
+  </form>
+{% else %}
+<a href="{% url 'blog:home' %}" class="btn btn-info btn-md">Back</a>
+<br><br>
+<h2>Login to like and unlike the post.</h2>
+<a href="{% url 'login' %}" class="btn btn-primary btn-md"><i class="fa fa-sign-in" aria-hidden="true"></i>   Login</a>
+{% endif %}
+<br><hr>
+<h3>Total Likes - {{total_likes}}</h3>
+
+
+{% endblock %}

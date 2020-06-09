@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<br>
+<div class="jumbotron bg-dark text-white">
+  <h3 id="about">About Me</h3>
+  <p><h4>Hi this is Adhithya(a.k.a Papa Python ),the creator of <a href="{% url 'blog:home' %}">Tech Blog</a>.This website is created using <a href="https://docs.djangoproject.com/en/3.0/">Django</a>(Python Framework).You can post anything on this website.Make sure to follow my <a href="https://www.instagram.com/">Instagram</a> Page to check out more about me.</h4></p>
+  <hr>
+  <a href="mailto:addytrunks@gmail.com" class="btn btn-success btn-md"><i class="fa fa-envelope"></i> Gmail Me</a>
+  <!-- <a href="https://www.instagram.com/" class="btn btn-danger btn-lg">DM me</a> --> </div>
+
+
+
+{% endblock %}

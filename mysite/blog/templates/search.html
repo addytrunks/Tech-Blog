@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<br>
+<h3>Search Results:</h3>
+<hr>
+{% if posts %}
+  {% for post in posts %}
+  <div class="card width: 24rem">
+
+      <div class="container-fluid">
+        <br>
+        <h4>{{post.author|title}}</h4>
+        <h5 class="card-subtitle mb-2 text-muted">{{post.post_date}}</h5><hr>
+
+      </div>
+
+    <div class="card-body">
+      <h3 id="title"><a href="{% url 'blog:detail' post.pk %}">{{post.title|title}}</a></h3>
+      <h5>Category:<a href="{% url 'blog:category' post.category %}">{{post.category|title|safe}}</a></h5>
+
+      {% if post.text|length <  45  %}
+        <p>{{post.text}}</p>
+      {% else %}
+        <p>{{post.text|slice:":45:"}}....</p>
+      {% endif %}
+    </div>
+
+  </div>
+  <br>
+  {% endfor %}
+{% else %}
+
+{% if query|length > 14 %}
+<h4><p>Your search<strong> '{{query|slice:":20:"}}...' </strong>did not match the document.<br><br>
+  Suggestions:<br></h4><hr>
+
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action"><h5>Make sure all words are spelled correctly</h5></li>
+      <li class="list-group-item list-group-item-action"><h5>Try different keywords</h5></li>
+      <li class="list-group-item list-group-item-action"><h5>Try more general keywords</h5></li>
+      <li class="list-group-item list-group-item-action"><h5>Try lower keywords</h5></li>
+    </ul><br>
+    <a href="{% url 'blog:home' %}" class="btn btn-md btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i>   Back</a>
+
+{% else %}
+<h4><p>Your search<strong> '{{query}}' </strong>did not match the document.<br><br>
+  Suggestions:</h4><hr>
+
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action"><h5>Make sure all words are spelled correctly</h5></li>
+    <li class="list-group-item list-group-item-action"><h5>Try different keywords</h5></li>
+    <li class="list-group-item list-group-item-action"><h5>Try more general keywords</h5></li>
+    <li class="list-group-item list-group-item-action"><h5>Try lower keywords</h5></li>
+  </ul>
+{% endif %}
+
+{% endif %}
+{% endblock%}

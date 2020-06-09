@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+<br>
+
+{% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
+    <h3>Update Post:</h3>
+    <hr>
+
+    <form class="form-group" method="post">
+      {% csrf_token %}
+      {{form.media}}
+      {{form.as_p}}
+        <a href="{% url 'blog:detail' post.pk %}" class="btn btn-md btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i>   Back</a>
+        <button type="submit" class="btn btn-success btn-md"><i class="fa fa-upload" aria-hidden="true"></i>   Update</button>
+          </form>
+  {% else %}
+    <hr>
+    <h1>You can't update other's post.</h1>
+  {% endif %}
+
+{% else %}
+<h3>Error 404</h3>
+<hr>
+<h4>You are not Logged in,Click the button below to login.If you're not logged then register.</h4><br>
+<a href="{% url 'login' %}" class="btn btn-primary btn-lg"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</a>
+<a href="{% url 'reg:register' %}" class="btn btn-success btn-lg">Register</a>
+{% endif %}
+
+{% endblock %}

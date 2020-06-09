@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Create a New Post{% endblock %}
+
+{% block content %}
+
+<br>
+{% if user.is_authenticated %}
+<h3>Add Post:</h3>
+<hr>
+
+<form class="form-group" method="post">
+  {% csrf_token %}
+  {{form.media}}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-primary btn-md">
+    <i class="fa fa-plus" aria-hidden="true"></i>    Post</button>
+</form>
+
+
+<script>
+  var name = '{{ user.id }}';
+  document.getElementById("user").value = name;
+</script>
+
+{% else %}
+<h3>Error 404</h3>
+<hr>
+<h4>You are not Logged in,you cant add a post.Click the button below to login.If you're not logged then register.</h4>
+<a href="{% url 'login' %}" class="btn btn-primary btn-md"<i class="fa fa-sign-in" aria-hidden="true"></i>   >Login</a>
+<a href="{% url 'reg:register' %}" class="btn btn-success btn-md">Register</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+{% if not user.is_authenticated %}
+<h3 class="">Login</h3>
+<hr>
+<form class="form-group" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-outline-primary btn-md"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</button><br>
+  <small class="form-text text-muted"><h6>Don't have an account?<a href="{% url 'reg:register' %}">Create</a></h6></small>
+</form>
+{% else %}
+
+<h3>Error 404!User already logged in</h3><hr>
+
+<h4>Oops!You are already logged in.Click here if you want to logout </h4>
+<a href="{% url 'reg:logout' %}" class="btn btn-outline-danger btn-md">Logout</a>
+{% endif %}
+{% endblock %}

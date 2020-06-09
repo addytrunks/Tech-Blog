@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Tech Blog{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    {% comment %} Kaushan Script-Brand Font {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    {% comment %} Pt Serif -Post Title{% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+    {% comment %} Mukta-For the whole body {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark navbar-expand bg-dark">
+
+      <a class="navbar-brand boom" id="blink" href="{% url 'blog:home' %}" title="Get Blog or Get Out">Tech Blog</a>
+
+      <ul class="navbar-nav">
+
+
+      {% if user.is_authenticated %}
+
+        <li class="nav-item active">
+            <a class="nav-link link" href="{% url 'blog:add_post' %}"> Add Post</a>
+        </li>
+
+      {% endif %}
+
+        <li class="nav-item active">
+          <a class="nav-link link" href="{% url 'blog:category_list' %}">Categories</a>
+        </li>
+
+        {% if not user.is_authenticated  %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'reg:register' %}">Sign Up</a>
+          </li>
+
+          <li class="nav-item active">
+            <a href="{% url 'reg:login' %}" class="nav-link">Login</a>
+          </li>
+
+        {% endif %}
+
+        <li class="nav-item active ml-md-auto">
+            <a href="{% url 'blog:about' %}" class="nav-link">About</a>
+        </li>
+
+
+
+
+      </ul>
+
+    <form class="form-inline float-right" method="get" action="/search">
+
+      <div class="input-icons">
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Search"name='query' id='querys' aria-label="Search">
+      </div>
+
+      <button class="btn btn-outline-primary" type="submit">
+        Search
+      </button>
+    </form>
+
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav ml-md-auto">
+
+          <a href="https://github.com/addytrunks" title="GitHub" class="nav-link">
+              <i class="fa fa-github-square" style="font-size:24px"></i>
+          </a>
+
+            <a href="https://web.whatsapp.com/" title="Whatsapp" class="nav-link">
+              <i class="fa fa-whatsapp" style="font-size:24px"></i>
+            </a>
+
+
+          <li class="nav-item active mb-3 mb-md-0 ml-md-3">
+              <a href="{% url 'blog:profile' %}" class="nav-link"><i class="fa fa-user" aria-hidden="true"></i>   User Profile</a>
+          </li>
+
+
+          <li class="nav-item active">
+              <a href="{% url 'reg:logout' %}" class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i>   Logout</a>
+          </li>
+
+        </ul>
+
+        {% endif %}
+
+
+    </nav>
+
+    <div class="boxy">
+
+      <div class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+
+    </div>
+
+  </body>
+</html>

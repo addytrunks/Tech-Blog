@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<br>
+{% if user.is_authenticated %}
+<h3>User Details:</h3>
+<hr>
+
+<h4>Username:{{user.username}}</h4>
+<h4>User Email:<a href="{{user.email}}">{{user.email}}</a></h4>
+<h4>No of Posts:{{count}}</h4>
+<!-- <h2>Registered at {{user.date_joined_0}}</h2> -->
+<h4>Last Login at {{user.last_login}}</h4>
+<hr>
+
+<a href="{% url 'reg:password_reset' %}" class="btn btn-outline-info btn-lg">Reset Password</a>
+
+{% else %}
+<h3>Not Logged in:</h3><hr>
+<p>You need to be logged in to see your user profile</p>
+<a href="{% url 'reg:login' %}" class="btn btn-outline-primary btn-md"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</a>
+{% endif %}
+
+{% endblock %}
