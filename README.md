@@ -10,4 +10,7 @@ Feautures:
 * Filter posts based on categories
 * Like and Dislike Post
 
-> `npm init`
+```python
+for i in range(1,100):
+  print(i)
+```
