@@ -1,7 +1,7 @@
 # Tech-Blog
 
 
-Blog Application created with Django.
+Blog Application created with **Django.**
 
 Feautures:
 * Create,Update and Delete your posts
