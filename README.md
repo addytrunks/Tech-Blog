@@ -10,4 +10,4 @@ Feautures:
 * Filter posts based on categories
 * Like and Dislike Post
 
-> Hello
+> `npm init`
